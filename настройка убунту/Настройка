@@ -1,0 +1,643 @@
+
+---
+
+# 1. Установка и первоначальная настройка системы
+
+Обновление системы:
+
+```bash
+sudo apt update
+sudo apt upgrade -y
+sudo apt autoremove -y
+```
+
+Проверка оборудования:
+
+```bash
+lscpu
+free -h
+lsblk
+lspci
+lsusb
+```
+
+---
+
+# 2. Настройка служб и драйверов
+
+Установка дополнительных драйверов:
+
+```bash
+sudo ubuntu-drivers autoinstall
+```
+
+Проверка служб:
+
+```bash
+systemctl list-units --type=service
+```
+
+Включение автоматического запуска служб:
+
+```bash
+sudo systemctl enable NetworkManager
+sudo systemctl enable cups
+```
+
+---
+
+# 3. Использование утилит настройки ядра
+
+Установка утилиты:
+
+```bash
+sudo apt install tuned -y
+```
+
+Запуск:
+
+```bash
+sudo systemctl enable tuned
+sudo systemctl start tuned
+```
+
+Проверка:
+
+```bash
+tuned-adm active
+```
+
+---
+
+# 4. Настройка сети
+
+Просмотр интерфейсов:
+
+```bash
+ip a
+```
+
+Проверка маршрута:
+
+```bash
+ip route
+```
+
+Проверка интернета:
+
+```bash
+ping 8.8.8.8
+ping google.com
+```
+
+Проверка DNS:
+
+```bash
+nslookup google.com
+```
+
+---
+
+# 5. Настройка SSH
+
+Установка:
+
+```bash
+sudo apt install openssh-server -y
+```
+
+Запуск:
+
+```bash
+sudo systemctl enable ssh
+sudo systemctl start ssh
+```
+
+Проверка:
+
+```bash
+systemctl status ssh
+```
+
+Узнать IP:
+
+```bash
+ip a
+```
+
+Подключение:
+
+```bash
+ssh user@ip
+```
+
+---
+
+# 6. Удалённый доступ к активной сессии (XRDP)
+
+Установка:
+
+```bash
+sudo apt install xrdp -y
+```
+
+Добавление в группу:
+
+```bash
+sudo adduser xrdp ssl-cert
+```
+
+Запуск:
+
+```bash
+sudo systemctl enable xrdp
+sudo systemctl start xrdp
+```
+
+Проверка:
+
+```bash
+systemctl status xrdp
+```
+
+---
+
+# 7. Установка виртуального принтера
+
+```bash
+sudo apt install cups cups-pdf -y
+```
+
+Запуск:
+
+```bash
+sudo systemctl enable cups
+sudo systemctl start cups
+```
+
+Добавление пользователя:
+
+```bash
+sudo usermod -aG lpadmin $USER
+```
+
+Проверка:
+
+```bash
+lpstat -p
+```
+
+---
+
+# 8. Базовое программное обеспечение
+
+LibreOffice:
+
+```bash
+sudo snap install libreoffice
+```
+
+GIMP:
+
+```bash
+sudo snap install gimp
+```
+
+Inkscape:
+
+```bash
+sudo snap install inkscape
+```
+
+Архиватор:
+
+```bash
+sudo apt install p7zip-full -y
+```
+
+Утилита мониторинга:
+
+```bash
+sudo apt install hardinfo -y
+```
+
+---
+
+# 9. Среда разработки Android
+
+```bash
+sudo snap install android-studio --classic
+```
+
+Запуск:
+
+```bash
+android-studio
+```
+
+---
+
+# 10. Компиляторы GCC
+
+```bash
+sudo apt install build-essential -y
+```
+
+Проверка:
+
+```bash
+gcc --version
+g++ --version
+```
+
+---
+
+# 11. Эмулятор операционных систем
+
+VirtualBox:
+
+```bash
+sudo apt install virtualbox -y
+```
+
+Проверка:
+
+```bash
+virtualbox
+```
+
+---
+
+# 12. Эмулятор 3D-графики
+
+Mesa:
+
+```bash
+sudo apt install mesa-utils -y
+```
+
+Проверка:
+
+```bash
+glxinfo | grep OpenGL
+```
+
+Тест:
+
+```bash
+glxgears
+```
+
+---
+
+# 13. СУБД
+
+PostgreSQL:
+
+```bash
+sudo apt install postgresql postgresql-contrib -y
+```
+
+Запуск:
+
+```bash
+sudo systemctl enable postgresql
+sudo systemctl start postgresql
+```
+
+Проверка:
+
+```bash
+sudo systemctl status postgresql
+```
+
+---
+
+# 14. Антивирус
+
+ClamAV:
+
+```bash
+sudo apt install clamav clamtk -y
+```
+
+Обновление баз:
+
+```bash
+sudo freshclam
+```
+
+Проверка:
+
+```bash
+clamscan --version
+```
+
+Проверка домашней папки:
+
+```bash
+clamscan -r /home
+```
+
+---
+
+# 15. Резервное копирование системы
+
+Установка:
+
+```bash
+sudo apt install timeshift -y
+```
+
+Запуск:
+
+```bash
+sudo timeshift-gtk
+```
+
+Создание снимка:
+
+```bash
+sudo timeshift --create
+```
+
+---
+
+# 16. Создание установочного образа
+
+Установка:
+
+```bash
+sudo apt install brasero -y
+```
+
+Создание ISO:
+
+```bash
+sudo dd if=/dev/sdX of=backup.iso bs=4M status=progress
+```
+
+---
+
+# 17. Точки восстановления
+
+Просмотр:
+
+```bash
+sudo timeshift --list
+```
+
+Создание:
+
+```bash
+sudo timeshift --create
+```
+
+---
+
+# 18. Создание групп пользователей
+
+Создание групп:
+
+```bash
+sudo groupadd developers
+sudo groupadd managers
+```
+
+Создание пользователей:
+
+```bash
+sudo adduser ivan
+sudo adduser petr
+```
+
+Добавление:
+
+```bash
+sudo usermod -aG developers ivan
+sudo usermod -aG managers petr
+```
+
+Проверка:
+
+```bash
+groups ivan
+```
+
+---
+
+# 19. Настройка прав доступа
+
+Создание каталога:
+
+```bash
+sudo mkdir /project
+```
+
+Назначение группы:
+
+```bash
+sudo chown :developers /project
+```
+
+Права:
+
+```bash
+sudo chmod 770 /project
+```
+
+Проверка:
+
+```bash
+ls -l
+```
+
+---
+
+# 20. Аутентификация и авторизация
+
+Политика паролей:
+
+```bash
+sudo apt install libpam-pwquality -y
+```
+
+Редактирование:
+
+```bash
+sudo nano /etc/security/pwquality.conf
+```
+
+Добавить:
+
+```text
+minlen = 8
+minclass = 3
+```
+
+---
+
+# 21. Настройка журналов
+
+Установка:
+
+```bash
+sudo apt install rsyslog -y
+```
+
+Запуск:
+
+```bash
+sudo systemctl enable rsyslog
+sudo systemctl start rsyslog
+```
+
+Просмотр:
+
+```bash
+journalctl
+```
+
+Последние ошибки:
+
+```bash
+journalctl -p err
+```
+
+---
+
+# 22. Настройка интерфейса программ
+
+LibreOffice:
+
+```bash
+libreoffice
+```
+
+Android Studio:
+
+* выбрать темную тему;
+* установить Android SDK;
+* настроить размер шрифта.
+
+GIMP:
+
+* выбрать русский язык;
+* настроить панели инструментов.
+
+---
+
+# 23. Настройка обмена данными
+
+Архивация:
+
+```bash
+7z a archive.7z folder
+```
+
+Экспорт PDF:
+
+```bash
+libreoffice
+```
+
+Подключение к PostgreSQL:
+
+```bash
+sudo -u postgres psql
+```
+
+---
+
+# 24. Совместимость программ
+
+Установка Wine:
+
+```bash
+sudo apt install wine -y
+```
+
+Настройка:
+
+```bash
+winecfg
+```
+
+Низкое разрешение:
+
+```bash
+xrandr
+```
+
+Отключение эффектов:
+
+```bash
+gsettings set org.gnome.desktop.interface enable-animations false
+```
+
+Масштабирование:
+
+```bash
+gsettings set org.gnome.desktop.interface scaling-factor 1
+```
+
+---
+
+# Что выбрать для защиты выбора ПО
+
+| ПО             | Причина              |
+| -------------- | -------------------- |
+| Ubuntu         | стабильная система   |
+| Android Studio | разработка Android   |
+| GCC            | компиляторы C/C++    |
+| VirtualBox     | виртуальные машины   |
+| Mesa           | 3D-графика           |
+| PostgreSQL     | СУБД                 |
+| ClamAV         | антивирус            |
+| LibreOffice    | офисный пакет        |
+| GIMP           | графический редактор |
+| 7zip           | архиватор            |
+| HardInfo       | информация о системе |
+| XRDP           | удалённый доступ     |
+| CUPS-PDF       | виртуальный принтер  |
+| Timeshift      | точки восстановления |
+
+---
+
+# Что показать преподавателю
+
+```bash
+ping google.com
+systemctl status ssh
+systemctl status xrdp
+lpstat -p
+gcc --version
+virtualbox
+glxinfo | grep OpenGL
+sudo systemctl status postgresql
+clamscan --version
+sudo timeshift --list
+groups ivan
+journalctl -n 20
+```
+
+---
+
+# Порядок выполнения в конце работы
+
+1. Обновление системы.
+2. SSH.
+3. XRDP.
+4. Виртуальный принтер.
+5. Android Studio.
+6. GCC.
+7. VirtualBox.
+8. PostgreSQL.
+9. ClamAV.
+10. Timeshift.
+11. Группы и права.
+12. Журналы.
+13. Совместимость.
+14. Демонстрация преподавателю.
+
+Такой набор практически закрывает все критерии на **40–45 баллов**.

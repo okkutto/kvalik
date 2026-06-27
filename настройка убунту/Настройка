@@ -358,7 +358,7 @@ sudo timeshift-gtk
 Создание снимка:
 
 ```bash
-sudo timeshift --create
+sudo timeshift --create --comments "backup"
 ```
 
 ---
@@ -372,6 +372,9 @@ sudo apt install brasero -y
 ```
 
 Создание ISO:
+echo disk_image.img
+lsblk
+sudo dd if=/dev/sdaX of=/home/X/disk_image.img bs=4M status=progress
 
 ```bash
 sudo dd if=/dev/sdX of=backup.iso bs=4M status=progress
@@ -427,6 +430,8 @@ groups ivan
 ---
 
 # 19. Настройка прав доступа
+
+
 
 Создание каталога:
 
@@ -505,6 +510,13 @@ journalctl -p err
 ```
 
 ---
+настройка фаервола
+
+sudo apt install ufw -y
+sudo ufw allow ssh
+sudo ufw enable
+sudo ufw status verbose
+
 
 # 22. Настройка интерфейса программ
 

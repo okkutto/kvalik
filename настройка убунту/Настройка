@@ -374,6 +374,7 @@ sudo apt install brasero -y
 Создание ISO:
 echo disk_image.img
 lsblk
+вместо X на конце у SDA  ваш раздел диска, вместо X после /home ваш путь/ пользователь
 sudo dd if=/dev/sdaX of=/home/X/disk_image.img bs=4M status=progress
 
 ```bash
@@ -653,3 +654,16 @@ journalctl -n 20
 14. Демонстрация преподавателю.
 
 Такой набор практически закрывает все критерии на **40–45 баллов**.
+
+
+настройка общего буфера обмена, подключаем гостевую ос, включаем двухнаправленный ввод
+далее либо заходим в папку:
+--вместо X -имя вашего юзера
+cd /media/X/VBox_GAs_7.2.8 (можно прост ввести /media/X/ и нажать Tab дальше будет предложено что ввести)
+запустить:
+sudo ./VBoxLinuxAdditions.run
+либо
+sudo /media/X/VBox_GAs_7.2.8/VBoxLinuxAdditions.run
+далее:
+cd
+reboot
